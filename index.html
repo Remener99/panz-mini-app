@@ -24,8 +24,10 @@
         }
 
         header {
-            text-align: center;
-            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
         }
 
         h1 {
@@ -38,6 +40,15 @@
             font-size: 1.5rem;
             margin-top: 10px;
             color: #666;
+        }
+
+        .cart-link {
+            background: #000;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         .collections {
@@ -64,6 +75,20 @@
             margin: 10px 0;
             border-radius: 8px;
             border-left: 4px solid #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .product img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 4px;
+        }
+
+        .product-info {
+            flex: 1;
         }
 
         .btn {
@@ -96,6 +121,13 @@
             border-bottom: 1px solid #eee;
         }
 
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
         .cart-total {
             font-weight: bold;
             margin-top: 20px;
@@ -107,18 +139,21 @@
         <!-- Главная страница -->
         <div id="home-page">
             <header>
-                <h1>PANZ</h1>
-                <div class="tagline">Minimal. Urban. Bold.</div>
+                <div>
+                    <h1>PANZ</h1>
+                    <div class="tagline">Минимум решений. Максимум свободы. PANZ — одежда без лишнего.</div>
+                </div>
+                <button class="cart-link" onclick="goToCart()">Корзина (<span id="cart-count">0</span>)</button>
             </header>
 
             <div class="collections">
                 <div class="collection-item" onclick="showCollection('001')">
                     <h3>001 Black</h3>
-                    <p>Dark & sleek.</p>
+                    <p>Всё, что нужно для идеального чёрного образа</p>
                 </div>
                 <div class="collection-item" onclick="showCollection('002')">
                     <h3>002 White</h3>
-                    <p>Light & clean.</p>
+                    <p>Всё, что нужно для идеального светлого образа</p>
                 </div>
 
                 <!-- Закомментированные будущие коллекции -->
@@ -134,6 +169,7 @@
         <!-- Страница коллекции -->
         <div id="collection-page" class="hidden">
             <button class="btn back-btn" onclick="goHome()">← Назад</button>
+            <button class="cart-link" onclick="goToCart()">Корзина (<span id="cart-count-2">0</span>)</button>
             <h2 id="collection-title"></h2>
             <div id="products-list"></div>
         </div>
@@ -141,6 +177,7 @@
         <!-- Страница товара -->
         <div id="product-page" class="hidden">
             <button class="btn back-btn" onclick="goToCollection()">← Назад</button>
+            <button class="cart-link" onclick="goToCart()">Корзина (<span id="cart-count-3">0</span>)</button>
             <div id="product-info"></div>
             <div>
                 <button class="btn" onclick="addToCart()">Добавить в корзину</button>
@@ -165,14 +202,7 @@
                 <label>Адрес доставки:</label>
                 <input type="text" id="delivery-address" placeholder="Введите адрес">
             </div>
-            <div>
-                <label>Способ оплаты:</label>
-                <select id="payment-method">
-                    <option value="tinkoff">Тинькофф</option>
-                    <option value="cdek">CDEK</option>
-                </select>
-            </div>
-            <button class="btn" onclick="placeOrder()">Оплатить</button>
+            <button class="btn" onclick="goToTinkoff()">Оплатить в Тинькофф</button>
         </div>
     </div>
 
@@ -186,26 +216,26 @@
                 title: '001 Black',
                 products: [
                     { id: 1, name: 'Black Hoodie', price: 1500, desc: 'Темный худи из хлопка.', img: '001 Hoodies.png' },
-                    { id: 2, name: 'Black T-Shirt', price: 250, desc: 'Минималистичная футболка.', img: '001 T-shirt.png' },
-                    { id: 3, name: 'Black Beanie', price: 400, desc: 'Удобная шапка-бини.', img: '001 Beanie.png' }
+                    { id: 2, name: 'Black T-Shirt', price: 500, desc: 'Минималистичная футболка.', img: '001 T-shirt.png' },
+                    { id: 3, name: 'Black Beanie', price: 300, desc: 'Удобная бини.', img: '001 Beanie.png' }
                 ]
             },
             '002': {
                 title: '002 White',
                 products: [
-                    { id: 4, name: 'White Hoodie', price: 1500, desc: 'Белый худи из хлопка.', img: '002 Hoodies.png' },
-                    { id: 5, name: 'White T-Shirt', price: 250, desc: 'Минималистичная футболка.', img: '002 T-shirt.png' },
-                    { id: 6, name: 'White Pants', price: 400, desc: 'Удобная шапка-бини.', img: '002 Beanie.png' }
+                    { id: 4, name: 'White Hoodie', price: 5000, desc: 'Белый худи из хлопка.', img: '002 Hoodies.png' },
+                    { id: 5, name: 'White T-Shirt', price: 2500, desc: 'Минималистичная футболка.', img: '002 T-shirt.png' },
+                    { id: 6, name: 'White Pants', price: 4000, desc: 'Удобные брюки.', img: '002 Beanie.png' }
                 ]
             }
         };
 
-        // Закомментированные будущие коллекции
-        /*
-        '003': { title: '...', products: [...] },
-        ...
-        '015': { title: '...', products: [...] },
-        */
+        function updateCartCount() {
+            const count = cart.length;
+            document.getElementById('cart-count').textContent = count;
+            document.getElementById('cart-count-2').textContent = count;
+            document.getElementById('cart-count-3').textContent = count;
+        }
 
         function showCollection(id) {
             currentCollection = id;
@@ -217,10 +247,13 @@
                 const productEl = document.createElement('div');
                 productEl.className = 'product';
                 productEl.innerHTML = `
-                    <h3>${product.name}</h3>
-                    <p>${product.desc}</p>
-                    <p>${product.price} ₽</p>
-                    <button class="btn" onclick="showProduct(${product.id})">Подробнее</button>
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.desc}</p>
+                        <p>${product.price} ₽</p>
+                        <button class="btn" onclick="showProduct(${product.id})">Подробнее</button>
+                    </div>
                 `;
                 productsList.appendChild(productEl);
             });
@@ -235,6 +268,7 @@
             currentProduct = product;
 
             document.getElementById('product-info').innerHTML = `
+                <img src="${product.img}" alt="${product.name}" style="width:200px; height:200px; object-fit:cover;">
                 <h3>${product.name}</h3>
                 <p>${product.desc}</p>
                 <p>${product.price} ₽</p>
@@ -248,6 +282,7 @@
             if (!currentProduct) return;
             cart.push({...currentProduct});
             alert(`${currentProduct.name} добавлен в корзину.`);
+            updateCartCount();
         }
 
         function goToCollection() {
@@ -260,6 +295,7 @@
             document.getElementById('product-page').classList.add('hidden');
             document.getElementById('collection-page').classList.add('hidden');
             document.getElementById('order-page').classList.add('hidden');
+            document.getElementById('home-page').classList.add('hidden');
             document.getElementById('cart-page').classList.remove('hidden');
         }
 
@@ -273,13 +309,17 @@
                 const itemEl = document.createElement('div');
                 itemEl.className = 'cart-item';
                 itemEl.innerHTML = `
-                    <span>${item.name}</span>
+                    <div style="display:flex; align-items:center;">
+                        <img src="${item.img}" alt="${item.name}" />
+                        <span>${item.name}</span>
+                    </div>
                     <button class="btn" onclick="removeFromCart(${index})">Удалить</button>
                 `;
                 cartItems.appendChild(itemEl);
             });
 
             document.getElementById('total-price').textContent = total;
+            updateCartCount();
         }
 
         function removeFromCart(index) {
@@ -292,18 +332,16 @@
             document.getElementById('order-page').classList.remove('hidden');
         }
 
-        function placeOrder() {
+        function goToTinkoff() {
             const address = document.getElementById('delivery-address').value;
-            const method = document.getElementById('payment-method').value;
-
             if (!address) {
                 alert('Введите адрес доставки.');
                 return;
             }
 
-            alert(`Заказ оформлен. Адрес: ${address}. Способ оплаты: ${method}.`);
-            cart = [];
-            goHome();
+            // Заглушка: в будущем здесь будет вызов API Тинькофф
+            alert('Переход на оплату в Тинькофф...');
+            // Здесь можно будет вызвать Tinkoff API для создания платежа
         }
 
         function goHome() {
