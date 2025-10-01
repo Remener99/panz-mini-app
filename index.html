@@ -1,367 +1,318 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PANZ — Streetwear</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      padding: 20px;
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
 
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      margin-top: 30px;
-      letter-spacing: 1px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    .collections, .products, .product-detail, .cart, .delivery {
-      display: none;
-    }
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
 
-    .active {
-      display: block;
-    }
+        h1 {
+            font-size: 3rem;
+            color: #000;
+            letter-spacing: 2px;
+        }
 
-    .collection-card, .product-card {
-      background: #111;
-      border-radius: 12px;
-      padding: 15px;
-      margin: 10px 0;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
+        .tagline {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #666;
+        }
 
-    .collection-card:hover, .product-card:hover {
-      transform: translateY(-5px);
-      background: #1a1a1a;
-    }
+        .collections {
+            margin-top: 40px;
+        }
 
-    .collection-card h3, .product-card h3 {
-      margin: 0;
-      font-size: 18px;
-    }
+        .collection-item {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-left: 4px solid #000;
+        }
 
-    .product-card img {
-      width: 100%;
-      border-radius: 8px;
-    }
+        .collection-item:hover {
+            transform: translateX(5px);
+        }
 
-    .btn {
-      background: #fff;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      width: 100%;
-    }
+        .product {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ccc;
+        }
 
-    .btn:hover {
-      background: #aaa;
-    }
+        .btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .back-btn {
-      background: transparent;
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 10px;
-      border-radius: 30px;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+        .btn:hover {
+            background: #333;
+        }
 
-    .back-btn:hover {
-      background: #333;
-    }
+        .hidden {
+            display: none;
+        }
 
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #333;
-    }
+        .back-btn {
+            margin-top: 20px;
+        }
 
-    .total {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: center;
-    }
-  </style>
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Главная страница -->
-    <div id="home" class="collections active">
-      <h1>PANZ</h1>
-      <p style="text-align:center; color:#888;">Streetwear</p>
+    <div class="container">
+        <!-- Главная страница -->
+        <div id="home-page">
+            <header>
+                <h1>PANZ</h1>
+                <div class="tagline">Minimal. Urban. Bold.</div>
+            </header>
 
-      <div class="collection-card" onclick="showCollection('001')">
-        <h3>001: Black</h3>
-        <p>Коллекция чёрной одежды</p>
-      </div>
+            <div class="collections">
+                <div class="collection-item" onclick="showCollection('001')">
+                    <h3>001 Black</h3>
+                    <p>Dark & sleek.</p>
+                </div>
+                <div class="collection-item" onclick="showCollection('002')">
+                    <h3>002 White</h3>
+                    <p>Light & clean.</p>
+                </div>
 
-      <div class="collection-card" onclick="showCollection('002')">
-        <h3>002: White</h3>
-        <p>Коллекция светлой одежды</p>
-      </div>
-      
-      <button class="btn" onclick="showCart()">🛒 Корзина</button>
+                <!-- Закомментированные будущие коллекции -->
+                <!--
+                <div class="collection-item" onclick="showCollection('003')">
+                    <h3>003 Gray</h3>
+                    <p>Elegant.</p>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <!-- Страница коллекции -->
+        <div id="collection-page" class="hidden">
+            <button class="btn back-btn" onclick="goHome()">← Назад</button>
+            <h2 id="collection-title"></h2>
+            <div id="products-list"></div>
+        </div>
+
+        <!-- Страница товара -->
+        <div id="product-page" class="hidden">
+            <button class="btn back-btn" onclick="goToCollection()">← Назад</button>
+            <div id="product-info"></div>
+            <div>
+                <button class="btn" onclick="addToCart()">Добавить в корзину</button>
+                <button class="btn" onclick="goToOrder()">Оформить заказ</button>
+            </div>
+        </div>
+
+        <!-- Страница корзины -->
+        <div id="cart-page" class="hidden">
+            <button class="btn back-btn" onclick="goHome()">← Назад</button>
+            <h2>Корзина</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">Итого: <span id="total-price">0</span> ₽</div>
+            <button class="btn" onclick="goToOrder()">Оформить заказ</button>
+        </div>
+
+        <!-- Страница оформления заказа -->
+        <div id="order-page" class="hidden">
+            <button class="btn back-btn" onclick="goToCart()">← Назад</button>
+            <h2>Оформление заказа</h2>
+            <div>
+                <label>Адрес доставки:</label>
+                <input type="text" id="delivery-address" placeholder="Введите адрес">
+            </div>
+            <div>
+                <label>Способ оплаты:</label>
+                <select id="payment-method">
+                    <option value="tinkoff">Тинькофф</option>
+                    <option value="cdek">CDEK</option>
+                </select>
+            </div>
+            <button class="btn" onclick="placeOrder()">Оплатить</button>
+        </div>
     </div>
 
-    <!-- Страница коллекции -->
-    <div id="collection" class="products">
-      <button class="back-btn" onclick="showHome()">← Назад</button>
-      <h1 id="collection-title">Коллекция</h1>
-      <div id="product-list"></div>
-    </div>
+    <script>
+        let currentCollection = null;
+        let currentProduct = null;
+        let cart = [];
 
-    <!-- Страница товара -->
-    <div id="product" class="product-detail">
-      <button class="back-btn" onclick="showCollection(currentCollectionId)">← Назад</button>
-      <div id="product-content"></div>
-    </div>
+        const collections = {
+            '001': {
+                title: '001 Black',
+                products: [
+                    { id: 1, name: 'Black Hoodie', price: 1500, desc: 'Темный худи из хлопка.', img: '001 Hoodies.png' },
+                    { id: 2, name: 'Black T-Shirt', price: 250, desc: 'Минималистичная футболка.', img: '001 T-shirt.png' },
+                    { id: 3, name: 'Black Beanie', price: 400, desc: 'Удобная шапка-бини.', img: '001 Beanie.png' }
+                ]
+            },
+            '002': {
+                title: '002 White',
+                products: [
+                    { id: 4, name: 'White Hoodie', price: 1500, desc: 'Белый худи из хлопка.', img: '002 Hoodies.png' },
+                    { id: 5, name: 'White T-Shirt', price: 250, desc: 'Минималистичная футболка.', img: '002 T-shirt.png' },
+                    { id: 6, name: 'White Pants', price: 400, desc: 'Удобная шапка-бини.', img: '002 Beanie.png' }
+                ]
+            }
+        };
 
-    <!-- Страница корзины -->
-    <div id="cart" class="cart">
-      <button class="back-btn" onclick="showHome()">← Назад</button>
-      <h1>Корзина</h1>
-      <div id="cart-items"></div>
-      <div class="total">Итого: <span id="total-price">0</span> ₽</div>
-      <button class="btn" onclick="showDelivery()">Доставка</button>
-    </div>
+        // Закомментированные будущие коллекции
+        /*
+        '003': { title: '...', products: [...] },
+        ...
+        '015': { title: '...', products: [...] },
+        */
 
-    <!-- Страница доставки -->
-    <div id="delivery" class="delivery">
-      <button class="back-btn" onclick="showCart()">← Назад</button>
-      <h1>Доставка</h1>
-      <input type="text" id="city-input" placeholder="Введите город">
-      <button class="btn" onclick="getCities()">Найти город</button>
-      <div id="city-results"></div>
-      <div id="tariffs" style="display:none;">
-        <h3>Тарифы доставки:</h3>
-        <div id="tariff-list"></div>
-        <button class="btn" onclick="selectDelivery()">Выбрать доставку</button>
-      </div>
-    </div>
-  </div>
+        function showCollection(id) {
+            currentCollection = id;
+            document.getElementById('collection-title').textContent = collections[id].title;
+            const productsList = document.getElementById('products-list');
+            productsList.innerHTML = '';
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    let currentCollectionId = '';
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let selectedCity = null;
-    let selectedTariff = null;
-    let tariffs = [];
+            collections[id].products.forEach(product => {
+                const productEl = document.createElement('div');
+                productEl.className = 'product';
+                productEl.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>${product.desc}</p>
+                    <p>${product.price} ₽</p>
+                    <button class="btn" onclick="showProduct(${product.id})">Подробнее</button>
+                `;
+                productsList.appendChild(productEl);
+            });
 
-    function showHome() {
-      document.getElementById('home').classList.add('active');
-      document.getElementById('collection').classList.remove('active');
-      document.getElementById('product').classList.remove('active');
-      document.getElementById('cart').classList.remove('active');
-      document.getElementById('delivery').classList.remove('active');
-    }
-
-    function showCollection(id) {
-      currentCollectionId = id;
-      document.getElementById('home').classList.remove('active');
-      document.getElementById('collection').classList.add('active');
-      document.getElementById('product').classList.remove('active');
-      document.getElementById('cart').classList.remove('active');
-      document.getElementById('delivery').classList.remove('active');
-
-      const title = document.getElementById('collection-title');
-      title.textContent = `Коллекция ${id}`;
-
-      const productList = document.getElementById('product-list');
-      productList.innerHTML = '';
-
-      const products = {
-        '001': [
-          { id: 1, name: 'T-shirt', price: 300, img: '001 T-shirt.png' },
-          { id: 2, name: 'Hoodie', price: 1500, img: '001 Hoodies.png' },
-          { id: 3, name: 'Beanie', price: 250, img: '001 Beanie.png'}
-        ],
-        '002': [
-          { id: 4, name: 'T-shirt', price: 300, img: '002 T-shirt.png' },
-          { id: 5, name: 'Hoodie', price: 1500, img: '002 Hoodies.png' },
-          { id: 6, name: 'Beanie', price: 250, img: '002 Beanie.png'}
-        ]
-      };
-
-      const collection = products[id] || [];
-
-      collection.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.onclick = () => showProduct(p);
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>${p.price} ₽</p>
-        `;
-        productList.appendChild(card);
-      });
-    }
-
-    function showProduct(product) {
-      document.getElementById('collection').classList.remove('active');
-      document.getElementById('product').classList.add('active');
-
-      const content = document.getElementById('product-content');
-      content.innerHTML = `
-        <img src="${product.img}" alt="${product.name}" style="width:100%;border-radius:12px;">
-        <h2>${product.name}</h2>
-        <p style="font-size:20px;color:#fff;">${product.price} ₽</p>
-        <p>Описание: Чёрная оверсайз-футболка. Просто. Свободно..</p>
-        <button class="btn" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Добавить в корзину</button>
-      `;
-    }
-
-    function addToCart(id, name, price) {
-      const item = cart.find(item => item.id === id);
-      if (item) {
-        item.quantity++;
-      } else {
-        cart.push({ id, name, price, quantity: 1 });
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(`${name} добавлен в корзину`);
-    }
-
-    function showCart() {
-      document.getElementById('home').classList.remove('active');
-      document.getElementById('collection').classList.remove('active');
-      document.getElementById('product').classList.remove('active');
-      document.getElementById('cart').classList.add('active');
-
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = '';
-
-      let total = 0;
-
-      if (cart.length === 0) {
-        cartItems.innerHTML = '<p>Корзина пуста</p>';
-      } else {
-        cart.forEach(item => {
-          const itemTotal = item.price * item.quantity;
-          total += itemTotal;
-          const div = document.createElement('div');
-          div.className = 'cart-item';
-          div.innerHTML = `
-            <span>${item.name} x ${item.quantity}</span>
-            <span>${itemTotal} ₽</span>
-          `;
-          cartItems.appendChild(div);
-        });
-      }
-
-      document.getElementById('total-price').textContent = total;
-    }
-
-    function showDelivery() {
-      if (cart.length === 0) {
-        alert('Корзина пуста');
-        return;
-      }
-
-      document.getElementById('cart').classList.remove('active');
-      document.getElementById('delivery').classList.add('active');
-    }
-
-    function getCities() {
-      const city = document.getElementById('city-input').value;
-      fetch('https://your-backend-url.com/cdek/cities?q=' + encodeURIComponent(city))
-        .then(response => response.json())
-        .then(data => {
-          const results = document.getElementById('city-results');
-          results.innerHTML = '';
-          data.forEach(c => {
-            const div = document.createElement('div');
-            div.onclick = () => {
-              selectedCity = c;
-              results.innerHTML = `<p>Выбран: ${c.city}</p>`;
-              getTariffs(c.code);
-            };
-            div.textContent = `${c.city}, ${c.region}`;
-            results.appendChild(div);
-          });
-        });
-    }
-
-    function getTariffs(cityCode) {
-      fetch('https://your-backend-url.com/cdek/calculate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cityCode, items: cart })
-      })
-      .then(response => response.json())
-      .then(data => {
-        tariffs = data;
-        const tariffList = document.getElementById('tariff-list');
-        tariffList.innerHTML = '';
-        data.forEach(t => {
-          const div = document.createElement('div');
-          div.innerHTML = `${t.tariff_name} — ${t.price} ₽ (${t.delivery_period_min}-${t.delivery_period_max} дней)`;
-          div.onclick = () => {
-            selectedTariff = t;
-            div.style.background = '#333';
-          };
-          tariffList.appendChild(div);
-        });
-        document.getElementById('tariffs').style.display = 'block';
-      });
-    }
-
-    function selectDelivery() {
-      if (!selectedTariff) {
-        alert('Выберите тариф доставки');
-        return;
-      }
-
-      const total = parseInt(document.getElementById('total-price').textContent) + selectedTariff.price;
-
-      const orderData = {
-        userId: Telegram.WebApp.initDataUnsafe.user?.id || 'guest',
-        items: cart,
-        total: total,
-        delivery: {
-          city: selectedCity.city,
-          tariff: selectedTariff.tariff_name,
-          price: selectedTariff.price,
-          period: `${selectedTariff.delivery_period_min}-${selectedTariff.delivery_period_max} дней`
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('collection-page').classList.remove('hidden');
         }
-      };
 
-      fetch('https://your-backend-url.com/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert('Заказ создан! Переход на оплату...');
-        Telegram.WebApp.openInvoice(data.paymentUrl);
-      });
-    }
-  </script>
+        function showProduct(id) {
+            const collection = collections[currentCollection];
+            const product = collection.products.find(p => p.id === id);
+            currentProduct = product;
+
+            document.getElementById('product-info').innerHTML = `
+                <h3>${product.name}</h3>
+                <p>${product.desc}</p>
+                <p>${product.price} ₽</p>
+            `;
+
+            document.getElementById('collection-page').classList.add('hidden');
+            document.getElementById('product-page').classList.remove('hidden');
+        }
+
+        function addToCart() {
+            if (!currentProduct) return;
+            cart.push({...currentProduct});
+            alert(`${currentProduct.name} добавлен в корзину.`);
+        }
+
+        function goToCollection() {
+            document.getElementById('product-page').classList.add('hidden');
+            document.getElementById('collection-page').classList.remove('hidden');
+        }
+
+        function goToCart() {
+            renderCart();
+            document.getElementById('product-page').classList.add('hidden');
+            document.getElementById('collection-page').classList.add('hidden');
+            document.getElementById('order-page').classList.add('hidden');
+            document.getElementById('cart-page').classList.remove('hidden');
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <span>${item.name}</span>
+                    <button class="btn" onclick="removeFromCart(${index})">Удалить</button>
+                `;
+                cartItems.appendChild(itemEl);
+            });
+
+            document.getElementById('total-price').textContent = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function goToOrder() {
+            document.getElementById('cart-page').classList.add('hidden');
+            document.getElementById('order-page').classList.remove('hidden');
+        }
+
+        function placeOrder() {
+            const address = document.getElementById('delivery-address').value;
+            const method = document.getElementById('payment-method').value;
+
+            if (!address) {
+                alert('Введите адрес доставки.');
+                return;
+            }
+
+            alert(`Заказ оформлен. Адрес: ${address}. Способ оплаты: ${method}.`);
+            cart = [];
+            goHome();
+        }
+
+        function goHome() {
+            document.getElementById('collection-page').classList.add('hidden');
+            document.getElementById('product-page').classList.add('hidden');
+            document.getElementById('cart-page').classList.add('hidden');
+            document.getElementById('order-page').classList.add('hidden');
+            document.getElementById('home-page').classList.remove('hidden');
+        }
+    </script>
 </body>
-
 </html>
-
-
-
-
