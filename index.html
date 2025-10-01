@@ -107,16 +107,26 @@
     <!-- Главная страница -->
     <div id="home" class="collections active">
       <h1>PANZ</h1>
-      <p style="text-align:center; color:#888;">Streetwear будущего</p>
+      <p style="text-align:center; color:#888;">Streetwear</p>
 
       <div class="collection-card" onclick="showCollection('001')">
-        <h3>001: Basic</h3>
-        <p>Минималистичные основы</p>
+        <h3>001: Black</h3>
+        <p>Тень</p>
       </div>
 
       <div class="collection-card" onclick="showCollection('002')">
-        <h3>002: Advanced</h3>
-        <p>Футуристические решения</p>
+        <h3>002: White</h3>
+        <p>Свет</p>
+      </div>
+
+      <div class="collection-card" onclick="showCollection('003')">
+        <h3>003: Gray</h3>
+        <p>Бетон</p>
+      </div>
+
+      <div class="collection-card" onclick="showCollection('004')">
+        <h3>003: Beige</h3>
+        <p>Песок</p>
       </div>
 
       <button class="btn" onclick="showCart()">🛒 Корзина</button>
@@ -191,12 +201,14 @@
 
       const products = {
         '001': [
-          { id: 1, name: 'Basic Hoodie', price: 5990, img: 'https://placehold.co/300x300/000/fff?text=Hoodie' },
-          { id: 2, name: 'Basic Tee', price: 2990, img: 'https://placehold.co/300x300/000/fff?text=Tee' }
+          { id: 1, name: 'T-shirt', price: 300, img: 'Pictures/001/001 T-shirt' },
+          { id: 2, name: 'Hoodie', price: 1500, img: 'Pictures/001/001 Hoodies' },
+          { id: 3, name: 'Beanie', price: 250, img: 'Pictures/001/001 Beanie'}
         ],
         '002': [
-          { id: 3, name: 'Advanced Jacket', price: 12990, img: 'https://placehold.co/300x300/000/fff?text=Jacket' },
-          { id: 4, name: 'Future Pants', price: 8990, img: 'https://placehold.co/300x300/000/fff?text=Pants' }
+          { id: 4, name: 'T-shirt', price: 300, img: 'Pictures/002/002 T-shirt' },
+          { id: 5, name: 'Hoodie', price: 1500, img: 'Pictures/002/002 Hoodies' },
+          { id: 6, name: 'Beanie', price: 250, img: 'Pictures/002/002 Beanie'}
         ]
       };
 
@@ -224,7 +236,7 @@
         <img src="${product.img}" alt="${product.name}" style="width:100%;border-radius:12px;">
         <h2>${product.name}</h2>
         <p style="font-size:20px;color:#fff;">${product.price} ₽</p>
-        <p>Описание: ультра-минималистичный крой, ткань будущего.</p>
+        <p>Описание: Чёрная оверсайз-футболка. Просто. Свободно..</p>
         <button class="btn" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Добавить в корзину</button>
       `;
     }
@@ -357,4 +369,5 @@
     }
   </script>
 </body>
+
 </html>
